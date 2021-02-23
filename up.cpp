@@ -16,7 +16,7 @@ const int ARRAY_SIZE = 4;
 unordered_map<string, int> monthsMap;
 
 // Function which initializes the monthsMap
-void sort_months()
+void assignMonths()
 {
     monthsMap["Jan"] = 1;
     monthsMap["Feb"] = 2;
@@ -81,10 +81,12 @@ string todayDate()
 
     return MY_TIME ;
 }
-//The following function to add the default data to the array
+// The following function to add the default data to the array
+// You can use any other source to get the data instead of typing it
+// But now this is just an example
 void defaultData(Day arr_days[])
 {
-
+    //Each day consists of 6 data variables [Date-Open-High-Low-Close-AVG]
     //Day 1
     arr_days[0].date = "19 Feb 2021";
     arr_days[0].open = 100;
@@ -107,9 +109,10 @@ void defaultData(Day arr_days[])
     arr_days[2].close = 20;
     arr_days[2].avg = 0;
 }
-
-
-
+// The following function calculates the AVG closing time for the most recent day
+// The function takes the array, then initialize variable sum = 0 with type int
+// to store the closing time for all days using fol loop, after for loop we divide
+// sum by the array size to get the AVG and putting it in the appropriate place (most recent day).
 void calculateAVGClosingPrice(Day arr_days[])
 {
     int sum = 0;
@@ -121,13 +124,12 @@ void calculateAVGClosingPrice(Day arr_days[])
 }
 int main()
 {
-    cout<<todayDate()<<endl;
     // Array with 4 days, each day has 6 parts [Date - Open - High - Low - Close - AVG]
     Day arr_days[ARRAY_SIZE];
     defaultData(arr_days);
 
     arr_days[3].date = todayDate();
-    arr_days[3].open = 100;
+    arr_days[3].open = 1010;
     arr_days[3].high = 100;
     arr_days[3].low = 100;
     arr_days[3].close = 8;
@@ -135,22 +137,29 @@ int main()
 
     calculateAVGClosingPrice(arr_days);
 
-    cout<<"Before sorting"<<endl;
-    cout<<"Date        - Open  - High  - Low  - Close  - AVG "<<endl;
+    cout<<"=> Before Sorting: "<<endl;
+    cout<<"------------------------------------------------------------"<<endl;
+    cout<<"Date "<<"         - "<<" Open "<<"  - "<<" High "<<"- "<<" Low "<<"   - "<<" Close "<<" - "<<"   AVG "<<endl;
+    cout<<"------------------------------------------------------------"<<endl;
     for(int i = 0 ; i<ARRAY_SIZE; i++)
     {
-        cout<<arr_days[i].date<<" - "<<arr_days[i].open<<"   - "<<arr_days[i].high<<"   - "
-            <<arr_days[i].low<<"  - "<<arr_days[i].close<<" - "<<setw(10)<<arr_days[i].avg<<endl;
+        cout<<setw(10)<<arr_days[i].date<<setw(5)<<" - "<<setw(5)<<arr_days[i].open<<setw(5)<<" - "<<setw(5)<<arr_days[i].high<<" - "
+            <<setw(5)<<arr_days[i].low<<setw(5)<<"  - "<<setw(5)<<arr_days[i].close<<setw(5)<<" - "<<setw(5)<<arr_days[i].avg<<endl;
     }
 
-    sort_months();
-
+    assignMonths();
     sort(arr_days, arr_days + ARRAY_SIZE, comp);
-    cout<<"After sorting"<<endl;
-        for(int i = 0 ; i<ARRAY_SIZE; i++)
+
+    cout<<endl;
+    cout<<"=> After Sorting: "<<endl;
+    cout<<"------------------------------------------------------------"<<endl;
+    cout<<"Date "<<"         - "<<" Open "<<"  - "<<" High "<<"- "<<" Low "<<"   - "<<" Close "<<" - "<<"   AVG "<<endl;
+    cout<<"------------------------------------------------------------"<<endl;
+    for(int i = 0 ; i<ARRAY_SIZE; i++)
     {
-        cout<<arr_days[i].date<<" - "<<arr_days[i].open<<"   - "<<arr_days[i].high<<"   - "
-            <<arr_days[i].low<<"  - "<<arr_days[i].close<<" - "<<setw(10)<<arr_days[i].avg<<endl;
+        cout<<setw(10)<<arr_days[i].date<<setw(5)<<" - "<<setw(5)<<arr_days[i].open<<setw(5)<<" - "<<setw(5)<<arr_days[i].high<<" - "
+            <<setw(5)<<arr_days[i].low<<setw(5)<<"  - "<<setw(5)<<arr_days[i].close<<setw(5)<<" - "<<setw(5)<<arr_days[i].avg<<endl;
     }
+
     return 0;
 }
