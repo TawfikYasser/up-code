@@ -28,36 +28,46 @@ void assignMonths()
     monthsMap["Nov"] = 11;
     monthsMap["Dec"] = 12;
 }
+//The following function used to compare YEAR - MONTH - DAY for sorting process
 bool comp(Day a, Day b)
 {
     // Comparing the years
+    //Extracting the YEAR from each day date
     string str1 = a.date.substr(7, 5);
     string str2 = b.date.substr(7, 5);
+    // Check if the Two years are not equal, so we will sort them in descending order
+    // Using compare function, it will return positive value if the first year greater than the second one
     if (str1.compare(str2) != 0) {
         if (str1.compare(str2) > 0)
             return true;
-        return false;
+        return false; // If two years are equal so we will compare the month
     }
 
     // Comparing the months
+    //Extracting the MONTH from each day date
     string month_sub_a = a.date.substr(3, 3);
     string month_sub_b = b.date.substr(3, 3);
 
     // Taking numeric value of months from monthsMap
     int month_a = monthsMap[month_sub_a];
     int month_b = monthsMap[month_sub_b];
+    //Check if the Two months are not equal, so we will sort them in descending order
+    // Using compare function, it will return positive value if the first month greater than the second one
     if (month_a != month_b) {
         return month_a > month_b;
     }
 
     // Comparing the days
+    //Extracting the DAY from each day date
     string day_a = a.date.substr(0, 2);
     string day_b = b.date.substr(0, 2);
+    //Check if the Two days are not equal, so we will sort them in descending order
+    // Using compare function, it will return positive value if the first day greater than the second one
     if (day_a.compare(day_b) > 0)
         return true;
     return false;
 }
-
+// The following function calculates the current date.
 string todayDate()
 {
     time_t t ;
@@ -73,9 +83,9 @@ string todayDate()
     // Copies into ptr the content of format,
     // expanding its format specifiers into the corresponding values
     // that represent the time described in timeptr, with a limit of maxsize characters.
+    // Date format ind (%d) -> Day ex: 23 - (%b) -> Month ex: Feb - (%Y) -> Year ex: 2021
     strftime(MY_TIME, sizeof(MY_TIME), "%d %b %Y", tmp);
-
-    return MY_TIME ;
+    return MY_TIME;
 }
 // The following function to add the default data to the array
 // You can use any other source to get the data instead of typing it
@@ -111,11 +121,14 @@ void defaultData(Day arr_days[])
 // sum by the array size to get the AVG and putting it in the appropriate place (most recent day).
 void calculateAVGClosingPrice(Day arr_days[])
 {
+    //Store total closing price values
     int sum = 0;
+    //Calculate total sum
     for(int i = 0 ; i<ARRAY_SIZE ; i++)
     {
         sum += arr_days[i].close;
     }
+    //Put the new AVG for most recent day
     arr_days[ARRAY_SIZE-1].avg = (float)sum/ARRAY_SIZE;
 }
 int main()
