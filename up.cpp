@@ -4,32 +4,35 @@
 #include <iomanip>
 using namespace std;
 const int ARRAY_SIZE = 4;
-class Day{
+class Day
+{
 public:
     string date;
     int open, high, low, close;
     float avg;
 };
-string todayDate(){
-	time_t t ;
+string todayDate()
+{
+    time_t t ;
     tm *tmp ;
-	char MY_TIME[50];
-	time( &t );
-	// localtime() uses the time pointed by t ,
-	// to fill a tm structure with the
-	// values that represent the
-	// corresponding local time.
-	tmp = localtime( &t );
-	// using strftime to display time
-	// Copies into ptr the content of format,
+    char MY_TIME[50];
+    time( &t );
+    // localtime() uses the time pointed by t ,
+    // to fill a tm structure with the
+    // values that represent the
+    // corresponding local time.
+    tmp = localtime( &t );
+    // using strftime to display time
+    // Copies into ptr the content of format,
     // expanding its format specifiers into the corresponding values
     // that represent the time described in timeptr, with a limit of maxsize characters.
-	strftime(MY_TIME, sizeof(MY_TIME), "%d %b %Y", tmp);
+    strftime(MY_TIME, sizeof(MY_TIME), "%d %b %Y", tmp);
 
-	return MY_TIME ;
+    return MY_TIME ;
 }
 //The following function to add the default data to the array
-void defaultData(Day arr_days[]){
+void defaultData(Day arr_days[])
+{
 
     //Day 1
     arr_days[0].date = "19 Feb 2021";
@@ -53,9 +56,11 @@ void defaultData(Day arr_days[]){
     arr_days[2].close = 20;
     arr_days[2].avg = 0;
 }
-void calculateAVGClosingPrice(Day arr_days[]){
+void calculateAVGClosingPrice(Day arr_days[])
+{
     int sum = 0;
-    for(int i = 0 ; i<ARRAY_SIZE ;i++){
+    for(int i = 0 ; i<ARRAY_SIZE ; i++)
+    {
         sum += arr_days[i].close;
     }
     arr_days[ARRAY_SIZE-1].avg = (float)sum/ARRAY_SIZE;
@@ -77,9 +82,10 @@ int main()
 
     cout<<"Before sorting"<<endl;
     cout<<"Date        - Open  - High  - Low  - Close  - AVG "<<endl;
-    for(int i = 0 ;i<ARRAY_SIZE;i++){
+    for(int i = 0 ; i<ARRAY_SIZE; i++)
+    {
         cout<<arr_days[i].date<<" - "<<arr_days[i].open<<"   - "<<arr_days[i].high<<"   - "
-        <<arr_days[i].low<<"  - "<<arr_days[i].close<<" - "<<setw(10)<<arr_days[i].avg<<endl;
+            <<arr_days[i].low<<"  - "<<arr_days[i].close<<" - "<<setw(10)<<arr_days[i].avg<<endl;
     }
     cout<<"After sorting"<<endl;
     return 0;
