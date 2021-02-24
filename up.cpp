@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 // Constant for the array size
-const int ARRAY_SIZE = 4;
+const int ARRAY_SIZE = 6;
 // Unordered map to store months and it’s corresponding numbers.
 unordered_map<string, int> monthsMap;
 // Day class to represent each day with [Date-Open-High-Low-Close-AVG]
@@ -92,6 +92,7 @@ string todayDate()
 // But now this is just an example
 void defaultData(Day arr_days[])
 {
+    /// Consider that date format should be like -> (01 Feb 2021) not (1 Feb 2021) for numbers less than 10.
     //Each day consists of 6 data variables [Date-Open-High-Low-Close-AVG]
     //Day 1
     arr_days[0].date = "19 Feb 2021";
@@ -114,6 +115,20 @@ void defaultData(Day arr_days[])
     arr_days[2].low = 100;
     arr_days[2].close = 20;
     arr_days[2].avg = 0;
+    //Day 4
+    arr_days[3].date = "15 Jan 2021";
+    arr_days[3].open = 100;
+    arr_days[3].high = 100;
+    arr_days[3].low = 100;
+    arr_days[3].close = 20;
+    arr_days[3].avg = 0;
+    //Day 5
+    arr_days[4].date = "01 Feb 2021";
+    arr_days[4].open = 100;
+    arr_days[4].high = 100;
+    arr_days[4].low = 100;
+    arr_days[4].close = 20;
+    arr_days[4].avg = 0;
 }
 // The following function calculates the AVG closing time for the most recent day
 // The function takes the array, then initialize variable sum = 0 with type int
@@ -133,16 +148,17 @@ void calculateAVGClosingPrice(Day arr_days[])
 }
 int main()
 {
-    // Array with 4 days, each day has 6 parts [Date - Open - High - Low - Close - AVG]
+    // Array with 6 days, each day has 6 parts [Date - Open - High - Low - Close - AVG]
     Day arr_days[ARRAY_SIZE]; // Array of type Day
     defaultData(arr_days); // Calling defaultData() and send the array to initialize the default days
-
-    arr_days[3].date = todayDate(); // The function todayDate() to get the current day date, ex: 23 Feb 2021
-    arr_days[3].open = 1010; // Add the open price
-    arr_days[3].high = 100; // Add the high price
-    arr_days[3].low = 100; // Add the low price
-    arr_days[3].close = 8; // Add the close price
-    arr_days[3].avg = 0; // Set the AVG to zero
+    //Day 6
+    arr_days[5].date = todayDate(); // The function todayDate() to get the current day date, ex: 23 Feb 2021
+    //Here we can put the data or take it as an input
+    arr_days[5].open = 100; // Add the open price
+    arr_days[5].high = 100; // Add the high price
+    arr_days[5].low = 100; // Add the low price
+    arr_days[5].close = 8; // Add the close price
+    arr_days[5].avg = 0; // Set the AVG to zero
 
     //Calling of function that will calculate the total closing price AVG for all days
     calculateAVGClosingPrice(arr_days);
