@@ -42,12 +42,10 @@ bool comp(Day a, Day b)
             return true;
         return false; // If two years are equal so we will compare the month
     }
-
     // Comparing the months
     //Extracting the MONTH from each day date
     string month_sub_a = a.date.substr(3, 3);
     string month_sub_b = b.date.substr(3, 3);
-
     // Taking numeric value of months from monthsMap
     int month_a = monthsMap[month_sub_a];
     int month_b = monthsMap[month_sub_b];
@@ -56,7 +54,6 @@ bool comp(Day a, Day b)
     if (month_a != month_b) {
         return month_a > month_b;
     }
-
     // Comparing the days
     //Extracting the DAY from each day date
     string day_a = a.date.substr(0, 2);
@@ -159,10 +156,8 @@ int main()
     arr_days[5].low = 100; // Add the low price
     arr_days[5].close = 8; // Add the close price
     arr_days[5].avg = 0; // Set the AVG to zero
-
     //Calling of function that will calculate the total closing price AVG for all days
     calculateAVGClosingPrice(arr_days);
-
     // Printing the array of data before sorting it according to date
     cout<<"=> Before Sorting: "<<endl;
     cout<<"------------------------------------------------------------"<<endl;
@@ -173,13 +168,10 @@ int main()
         cout<<setw(10)<<arr_days[i].date<<setw(5)<<" - "<<setw(5)<<arr_days[i].open<<setw(5)<<" - "<<setw(5)<<arr_days[i].high<<" - "
             <<setw(5)<<arr_days[i].low<<setw(5)<<"  - "<<setw(5)<<arr_days[i].close<<setw(5)<<" - "<<setw(5)<<arr_days[i].avg<<endl;
     }
-
     // Calling the function that will assign every month name to it’s number, ex: Feb -> 2
     assignMonths();
-
     // Calling the function that will sort the array according to the dates
     sort(arr_days, arr_days + ARRAY_SIZE, comp);
-
     // Printing the sorted array in descending order according to dates.
     cout<<endl;
     cout<<"=> After Sorting: "<<endl;
